@@ -1,0 +1,39 @@
+{
+  "name": "knight_path_finder",
+  "version": "1.0.0",
+  "description": "Path finding Algorithms for knight on a chessboard",
+  "main": "dist/index.js",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cocacola-lover/knight_path_finder.git"
+  },
+  "keywords": [
+    "algorithm",
+    "path-finding",
+    "chess"
+  ],
+  "author": "cocacola-lover",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cocacola-lover/knight_path_finder/issues"
+  },
+  "homepage": "https://github.com/cocacola-lover/knight_path_finder#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "@types/jest": "^29.2.5",
+    "babel-jest": "^29.3.1",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.5"
+  }
+}
