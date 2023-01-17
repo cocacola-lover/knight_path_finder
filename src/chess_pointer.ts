@@ -22,8 +22,8 @@ export default class ChessPointer {
 
         moveOne.forEach((y) => {
             moveTwo.forEach((x) => {
-                if (this.isWithinBounds(x, y)) ans.push(new ChessPointer(x, y, this.board))
-                if (this.isWithinBounds(y, x)) ans.push(new ChessPointer(y, x, this.board))
+                if (this.isWithinBounds(this.x + x, this.y + y)) ans.push(new ChessPointer(this.x + x, this.y + y, this.board))
+                if (this.isWithinBounds(this.x + y, this.y + x)) ans.push(new ChessPointer(this.x + y, this.y +  x, this.board))
             })
         })
 
