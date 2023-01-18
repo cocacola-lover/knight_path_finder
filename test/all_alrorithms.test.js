@@ -6,9 +6,9 @@ const canReach = (a, b, searchMethod) => {
     const ite = searchMethod(board.createPointer(a[0],a[1]), board.createPointer(b[0], b[1]));
     while(!ite());
 
-    expect(board.squares[b[1]][b[0]].distanceFromStart).not.toBe(null);
+    expect(board.squares[b[0]][b[1]].distanceFromStart).not.toBe(null);
 
-    let walkBack = board.squares[b[1]][b[0]];
+    let walkBack = board.squares[b[0]][b[1]];
     while(walkBack.shortestPath !== null) walkBack = walkBack.shortestPath;
     expect(walkBack).toBe(board.createPointer(a[0],a[1]).at());
 }
