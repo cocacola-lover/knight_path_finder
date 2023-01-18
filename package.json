@@ -1,5 +1,5 @@
 {
-  "name": "knight_path_finder",
+  "name": "@cocacola-lover/knight_path_finder",
   "version": "0.0.1",
   "description": "Iterative path finding Algorithms for knight on a chessboard",
   "main": "dist/index.js",
