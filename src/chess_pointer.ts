@@ -34,6 +34,10 @@ export default class ChessPointer {
         return this.getNeighbours().filter((pointer) => pointer.at().isPassable);
     }
 
+    toString() {
+        return `${this.x},${this.y}`;
+    }
+
     static areSame(a : ChessPointer, b : ChessPointer) : boolean {
         return a.board === b.board && a.x === b.x && a.y === b.y;
     }
