@@ -1,6 +1,16 @@
+import ChessPointer from "./chess_pointer"
+
 export interface Square {
-    distanceFromStart : number | null,
-    shortestPath : Square | null,
+    distanceFromStart? : number,
+    shortestPath? : ChessPointer,
     isPassable : boolean,
-    other : Object | null
+    weight : number
+}
+
+export enum SearchResult {
+    SearchContinues, TargetFound, TargetNotFound
+}
+
+export interface SearchIterator {
+    () : {result : SearchResult, from? : ChessPointer, to? : ChessPointer};
 }
