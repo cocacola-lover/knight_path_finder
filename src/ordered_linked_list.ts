@@ -8,6 +8,7 @@ class ListItem<T> {
 
 export default class OrderedLinkedList<T> {
     private start : ListItem<T> | null = null;
+    // If negative then don't switch else switch
     private compareFunction : (a : T, b : T) => number;
 
     constructor(compareFunction : (a : T, b : T) => number, arr : T[] = []) {
@@ -46,6 +47,12 @@ export default class OrderedLinkedList<T> {
         this.start = this.start.next;
 
         return ans;
+    }
+
+    pickIn () : T | undefined {
+        if (this.start === null) return undefined;
+
+        return this.start.value;
     }
 
     add(a : T) {
