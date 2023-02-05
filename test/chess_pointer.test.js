@@ -1,7 +1,7 @@
-import {ChessPointer, buildBoard} from './../dist/index';
+import {ChessPointer, Board} from './../dist/index';
 
 test("Build Board works properly", () => {
-    const board = buildBoard(10, 10);
+    const board = new Board(10, 10);
 
     expect(board.squares.length).toBe(10);
     for (let i = 0; i < 10; i++) expect(board.squares[0].length).toBe(10);
@@ -11,7 +11,7 @@ test("Build Board works properly", () => {
 });
 
 test("ChessPointer works properly", () => {
-    const board = buildBoard(10, 10);
+    const board = new Board(10, 10);
 
     const pointer = board.createPointer(0, 0);
     expect(pointer.getPassableNeighbours()).toEqual([
