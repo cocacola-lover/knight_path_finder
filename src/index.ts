@@ -1,9 +1,10 @@
 import ChessPointer from "./chess_pointer.js";
-import deepFirstSearchIterator from "./DFS.js";
-import buildBoard from "./board.js";
+import Board from "./board.js";
 import OrderedLinkedList from "./ordered_linked_list.js";
-import dijkstraSearchIterator from "./Dijkstra.js";
+import { Square, SearchResult } from "./interfaces.js";
 
-const search = {deepFirstSearchIterator, dijkstraSearchIterator}
+import { dijkstraSearchIterator, deepFirstSearchIterator } from "./searchAlgorithms.js";
 
-export {ChessPointer, OrderedLinkedList, search, buildBoard};
+export {ChessPointer, OrderedLinkedList, Board,
+        Square, SearchResult,
+        deepFirstSearchIterator, dijkstraSearchIterator};
