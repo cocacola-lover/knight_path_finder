@@ -46,8 +46,17 @@ function baseSearchIterator ({start, end, orderFunction} : BaseSearchParameters)
             neighbour.at().shortestPath = pointer;
         }
 
+        let checkIfEndFound = false;
+
         (neighbours.filter((neighbour) => !explored.has(neighbour.toString())))
-        .forEach((neighbour) => queue.add(neighbour));
+        .forEach((neighbour) => {
+            if (ChessPointer.areSame(neighbour, end)) {
+                queue = new OrderedLinkedList<ChessPointer>(orderFunction, [end]);
+                checkIfEndFound = true;
+            }
+
+            if (!checkIfEndFound) queue.add(neighbour);
+        });
 
         return {result : SearchResult.SearchContinues, from : pointer.at().shortestPath, to : pointer};
     }
