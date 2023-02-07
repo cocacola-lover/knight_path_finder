@@ -10,7 +10,7 @@ export default class ChessPointer {
     }
 
     at() : Square {
-        return this.board[this.y][this.x];
+        return this.board[this.x][this.y];
     }
 
     getNeighbours() : ChessPointer[] {
@@ -44,8 +44,8 @@ export default class ChessPointer {
 
     private isWithinBounds(x: number, y : number) : boolean {
 
-        if (this.board[y] === undefined) return false;
-        if (this.board[y][x] === undefined) return false;
+        if (this.board[x] === undefined) return false;
+        if (this.board[x][y] === undefined) return false;
 
         return true;
     }

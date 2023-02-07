@@ -9,12 +9,12 @@ function createEmptySquare () : Square {
 export default class Board {
     squares : Square[][];
 
-    constructor(width : number, length : number) {
+    constructor(height : number, width : number) {
         this.squares = [];
 
-        for (let i = 0; i < length; i++) {
+        for (let i = 0; i < width; i++) {
             this.squares.push([]);
-            for (let j = 0; j < width; j++) this.squares[i].push(createEmptySquare());
+            for (let j = 0; j < height; j++) this.squares[i].push(createEmptySquare());
         }
     }
 
