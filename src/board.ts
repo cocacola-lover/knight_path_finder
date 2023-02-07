@@ -18,6 +18,14 @@ export default class Board {
         }
     }
 
+    forEach (func : (value : Square, x : number, y : number) => any) {
+        for (let i = 0; i < this.squares.length; i++) {
+            for (let j = 0; j < this.squares[0].length; j++) {
+                func(this.squares[i][j], i, j);
+            }
+        }
+    }
+
     createPointer (x : number, y: number) {
         return new ChessPointer(x, y, this.squares);
     }
