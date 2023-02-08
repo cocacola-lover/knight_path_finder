@@ -1,4 +1,5 @@
-import BasicPointer, {KnightPointer} from "./chess_pointer.js";
+import ChessPointer from "./chess_pointer.js";
+
 import { Square } from "./interfaces.js";
 
 function createEmptySquare () : Square {
@@ -26,8 +27,8 @@ export default class Board {
         }
     }
 
-    createBasicPointer = (x : number, y: number) => new BasicPointer(x, y, this.squares);
-    createKnightPointer = (x : number, y: number) => new KnightPointer(x, y, this.squares);
+    createBasicPointer = (x : number, y: number) => new ChessPointer.BasicPointer(x, y, this.squares);
+    createKnightPointer = (x : number, y: number) => new ChessPointer.KnightPointer(x, y, this.squares);
 
     setPassability (arr : boolean[][]) {
         this.forEach((value, x, y) => {

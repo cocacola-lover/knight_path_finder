@@ -1,6 +1,8 @@
 import { Square } from "./interfaces.js";
 
-export default class BasicPointer {
+namespace ChessPointers {
+
+export class BasicPointer {
     readonly x : number;
     readonly y : number;
     readonly board : Square[][];
@@ -69,3 +71,6 @@ export class KnightPointer extends BasicPointer {
         return ans;
     }
 }
+};
+
+export default ChessPointers;

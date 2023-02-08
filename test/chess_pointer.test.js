@@ -1,4 +1,4 @@
-import {pointers, Board} from './../dist/index';
+import {ChessPointers, Board} from './../dist/index';
 
 test("Build Board works properly", () => {
     const board = new Board(10, 10);
@@ -15,18 +15,18 @@ test("ChessPointer works properly", () => {
 
     const pointer = board.createKnightPointer(0, 0);
     expect(pointer.getPassableNeighbours()).toEqual([
-        new pointers.KnightPointer(2, 1, board.squares),
-        new pointers.KnightPointer(1, 2, board.squares), 
+        new ChessPointers.KnightPointer(2, 1, board.squares),
+        new ChessPointers.KnightPointer(1, 2, board.squares), 
     ])
 
     const neighbourSquares = board.createKnightPointer(2, 1).getPassableNeighbours().map((e) => e.at());
     [
-        new pointers.KnightPointer(0, 0, board.squares),
-        new pointers.KnightPointer(0, 2, board.squares),
-        new pointers.KnightPointer(4, 0, board.squares),
-        new pointers.KnightPointer(4, 2, board.squares), 
-        new pointers.KnightPointer(3, 3, board.squares),
-        new pointers.KnightPointer(1, 3, board.squares), 
+        new ChessPointers.KnightPointer(0, 0, board.squares),
+        new ChessPointers.KnightPointer(0, 2, board.squares),
+        new ChessPointers.KnightPointer(4, 0, board.squares),
+        new ChessPointers.KnightPointer(4, 2, board.squares), 
+        new ChessPointers.KnightPointer(3, 3, board.squares),
+        new ChessPointers.KnightPointer(1, 3, board.squares), 
     ].forEach((pointer) => expect(neighbourSquares).toContain(pointer.at()))
     
 });

@@ -1,4 +1,4 @@
-import {Board, SearchResult, iterators} from './../dist/index';
+import {Board, SearchResult, PathFindingIterators} from './../dist/index';
 
 const canReach = (a, b, searchMethod) => {
     const board = new Board(10, 10);
@@ -16,6 +16,6 @@ const canReach = (a, b, searchMethod) => {
 test("Testing if they can reach", () => {
     const points = [[0, 0], [3, 1], [5, 6], [3, 4], [5, 9], [1, 1]];
     for (let i = 0; i < points.length - 1; i++) {
-        Object.values(iterators).forEach((method) => canReach(points[i], points[i+1], method));
+        Object.values(PathFindingIterators).forEach((method) => canReach(points[i], points[i+1], method));
     }
 })

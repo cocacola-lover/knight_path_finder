@@ -1,6 +1,10 @@
-import BasicPointer from "./chess_pointer.js";
-import { Square, SearchIterator, SearchResult } from "./interfaces.js";
+import ChessPointer from "./chess_pointer.js";
+import { SearchIterator, SearchResult } from "./interfaces.js";
 import OrderedLinkedList from "./ordered_linked_list.js";
+
+import BasicPointer = ChessPointer.BasicPointer;
+
+namespace PathFindingIterators {
 
 interface OrderFunction {(a : BasicPointer, b : BasicPointer) : number}
 
@@ -17,7 +21,7 @@ function baseSearchIterator ({start, end, orderFunction} : BaseSearchParameters)
     let queue = new OrderedLinkedList<BasicPointer>(orderFunction, [start]);
     const explored = new Set<string>();
 
-    const iterate = () => {
+    const iterate : SearchIterator = () => {
         if (queue.isEmpty()) return {result : SearchResult.TargetNotFound};
 
         let pointer : BasicPointer;
@@ -64,13 +68,13 @@ function baseSearchIterator ({start, end, orderFunction} : BaseSearchParameters)
     return iterate;
 }
 
-export function deepFirstSearchIterator(start : BasicPointer, end : BasicPointer) {
+export function deepFirstSearchIterator(start : BasicPointer, end : BasicPointer) : SearchIterator {
     return baseSearchIterator({start, end, orderFunction : (a : BasicPointer, b : BasicPointer) => {
         return -1;
     }} as BaseSearchParameters)
 }
 
-export function dijkstraSearchIterator(start : BasicPointer, end : BasicPointer) {
+export function dijkstraSearchIterator(start : BasicPointer, end : BasicPointer) : SearchIterator {
     return baseSearchIterator({start, end, orderFunction : (a : BasicPointer, b : BasicPointer) => {
 
         const aweight = a.at().weight;
@@ -80,3 +84,6 @@ export function dijkstraSearchIterator(start : BasicPointer, end : BasicPointer)
         return aweight - bweight;
     }} as BaseSearchParameters)
 }
+}
+
+export default PathFindingIterators;
