@@ -28,4 +28,16 @@ export default class Board {
 
     createBasicPointer = (x : number, y: number) => new BasicPointer(x, y, this.squares);
     createKnightPointer = (x : number, y: number) => new KnightPointer(x, y, this.squares);
+
+    setPassability (arr : boolean[][]) {
+        this.forEach((value, x, y) => {
+            this.squares[x][y].isPassable = arr[x][y];
+        });
+    }
+
+    setWeight (arr : number[][]) {
+        this.forEach((value, x, y) => {
+            this.squares[x][y].weight = arr[x][y];
+        });
+    }
 }
