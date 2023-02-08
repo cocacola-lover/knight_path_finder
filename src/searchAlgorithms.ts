@@ -1,12 +1,12 @@
-import ChessPointer from "./chess_pointer.js";
+import BasicPointer from "./chess_pointer.js";
 import { Square, SearchIterator, SearchResult } from "./interfaces.js";
 import OrderedLinkedList from "./ordered_linked_list.js";
 
-interface OrderFunction {(a : ChessPointer, b : ChessPointer) : number}
+interface OrderFunction {(a : BasicPointer, b : BasicPointer) : number}
 
 interface BaseSearchParameters {
-    start : ChessPointer,
-    end : ChessPointer, 
+    start : BasicPointer,
+    end : BasicPointer, 
     orderFunction : OrderFunction
 }
 
@@ -14,20 +14,20 @@ function baseSearchIterator ({start, end, orderFunction} : BaseSearchParameters)
 
     start.at().distanceFromStart = 0;
 
-    let queue = new OrderedLinkedList<ChessPointer>(orderFunction, [start]);
+    let queue = new OrderedLinkedList<BasicPointer>(orderFunction, [start]);
     const explored = new Set<string>();
 
     const iterate = () => {
         if (queue.isEmpty()) return {result : SearchResult.TargetNotFound};
 
-        let pointer : ChessPointer;
+        let pointer : BasicPointer;
         
         while (true) {
 
             if (queue.pickIn() === undefined) return {result : SearchResult.TargetNotFound};
-            if (ChessPointer.areSame(queue.pickIn() as ChessPointer, end)) return {result : SearchResult.TargetFound};
+            if (BasicPointer.areSame(queue.pickIn() as BasicPointer, end)) return {result : SearchResult.TargetFound};
 
-            pointer = queue.shift() as ChessPointer;
+            pointer = queue.shift() as BasicPointer;
 
             if (explored.has(pointer.toString())) { continue; }
             else { break; }
@@ -50,8 +50,8 @@ function baseSearchIterator ({start, end, orderFunction} : BaseSearchParameters)
 
         (neighbours.filter((neighbour) => !explored.has(neighbour.toString())))
         .forEach((neighbour) => {
-            if (ChessPointer.areSame(neighbour, end)) {
-                queue = new OrderedLinkedList<ChessPointer>(orderFunction, [end]);
+            if (BasicPointer.areSame(neighbour, end)) {
+                queue = new OrderedLinkedList<BasicPointer>(orderFunction, [end]);
                 checkIfEndFound = true;
             }
 
@@ -64,14 +64,14 @@ function baseSearchIterator ({start, end, orderFunction} : BaseSearchParameters)
     return iterate;
 }
 
-export function deepFirstSearchIterator(start : ChessPointer, end : ChessPointer) {
-    return baseSearchIterator({start, end, orderFunction : (a : ChessPointer, b : ChessPointer) => {
+export function deepFirstSearchIterator(start : BasicPointer, end : BasicPointer) {
+    return baseSearchIterator({start, end, orderFunction : (a : BasicPointer, b : BasicPointer) => {
         return -1;
     }} as BaseSearchParameters)
 }
 
-export function dijkstraSearchIterator(start : ChessPointer, end : ChessPointer) {
-    return baseSearchIterator({start, end, orderFunction : (a : ChessPointer, b : ChessPointer) => {
+export function dijkstraSearchIterator(start : BasicPointer, end : BasicPointer) {
+    return baseSearchIterator({start, end, orderFunction : (a : BasicPointer, b : BasicPointer) => {
 
         const aweight = a.at().weight;
         const bweight = b.at().weight;

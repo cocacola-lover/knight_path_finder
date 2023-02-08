@@ -1,6 +1,6 @@
 import { Square } from "./interfaces.js";
 
-export default class ChessPointer {
+export default class BasicPointer {
     readonly x : number;
     readonly y : number;
     readonly board : Square[][];
@@ -13,24 +13,23 @@ export default class ChessPointer {
         return this.board[this.x][this.y];
     }
 
-    getNeighbours() : ChessPointer[] {
+    getNeighbours() : BasicPointer[] {
 
-        const ans: ChessPointer[] = [];
+        const ans: BasicPointer[] = [];
 
         const moveOne : number[] = [1, -1];
-        const moveTwo : number[] = [2, -2];
 
+        moveOne.forEach((x) => {
+            if (this.isWithinBounds(this.x + x, this.y)) ans.push(new BasicPointer(this.x + x, this.y, this.board))
+        });
         moveOne.forEach((y) => {
-            moveTwo.forEach((x) => {
-                if (this.isWithinBounds(this.x + x, this.y + y)) ans.push(new ChessPointer(this.x + x, this.y + y, this.board))
-                if (this.isWithinBounds(this.x + y, this.y + x)) ans.push(new ChessPointer(this.x + y, this.y +  x, this.board))
-            })
+            if (this.isWithinBounds(this.x, this.y + y)) ans.push(new BasicPointer(this.x, this.y + y, this.board))
         })
 
         return ans;
     }
 
-    getPassableNeighbours() : ChessPointer[] {
+    getPassableNeighbours() : BasicPointer[] {
         return this.getNeighbours().filter((pointer) => pointer.at().isPassable);
     }
 
@@ -38,15 +37,35 @@ export default class ChessPointer {
         return `${this.x},${this.y}`;
     }
 
-    static areSame(a : ChessPointer, b : ChessPointer) : boolean {
+    static areSame(a : BasicPointer, b : BasicPointer) : boolean {
         return a.board === b.board && a.x === b.x && a.y === b.y;
     }
 
-    private isWithinBounds(x: number, y : number) : boolean {
+    protected isWithinBounds(x: number, y : number) : boolean {
 
         if (this.board[x] === undefined) return false;
         if (this.board[x][y] === undefined) return false;
 
         return true;
+    }
+}
+
+export class KnightPointer extends BasicPointer {
+
+    getNeighbours() : KnightPointer[] {
+
+        const ans: KnightPointer[] = [];
+
+        const moveOne : number[] = [1, -1];
+        const moveTwo : number[] = [2, -2];
+
+        moveOne.forEach((y) => {
+            moveTwo.forEach((x) => {
+                if (this.isWithinBounds(this.x + x, this.y + y)) ans.push(new KnightPointer(this.x + x, this.y + y, this.board))
+                if (this.isWithinBounds(this.x + y, this.y + x)) ans.push(new KnightPointer(this.x + y, this.y +  x, this.board))
+            })
+        })
+
+        return ans;
     }
 }
