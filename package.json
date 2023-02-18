@@ -1,6 +1,6 @@
 {
   "name": "@cocacola-lover/knight_path_finder",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "Iterative path finding Algorithms for knight on a chessboard",
   "main": "dist/index.js",
   "type": "module",
