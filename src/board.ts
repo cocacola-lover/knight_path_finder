@@ -29,6 +29,11 @@ export default class Board {
 
     createBasicPointer = (x : number, y: number) => new ChessPointer.BasicPointer(x, y, this.squares);
     createKnightPointer = (x : number, y: number) => new ChessPointer.KnightPointer(x, y, this.squares);
+    createKingPointer = (x : number, y: number) => new ChessPointer.KingPointer(x, y, this.squares);
+    createBishopPointer = (x : number, y: number) => new ChessPointer.BishopPointer(x, y, this.squares);
+    createRookPointer = (x : number, y: number) => new ChessPointer.RookPointer(x, y, this.squares);
+    createPawnPointer = (x : number, y: number) => new ChessPointer.PawnPointer(x, y, this.squares);
+    createQueenPointer = (x : number, y: number) => new ChessPointer.QueenPointer(x, y, this.squares);
 
     setPassability (arr : boolean[][]) {
         this.forEach((value, x, y) => {
