@@ -77,7 +77,7 @@ export class KingPointer extends BasicPointer {
 
         const ans: KingPointer[] = [];
 
-        const moveOne : number[] = [1, -1];
+        const moveOne : number[] = [1, -1, 0];
 
         moveOne.forEach((y) => {
             moveOne.forEach((x) => {
@@ -107,6 +107,26 @@ export class BishopPointer extends BasicPointer {
 
         return ans;
     }
+
+    getPassableNeighbours(): BishopPointer[] {
+        const ans: BishopPointer[] = [];
+
+        const moveDiagonal : number[][] = [[1, 1], [-1, -1], [-1, 1], [1, -1]];
+
+        moveDiagonal.forEach((pair) => {
+
+            let [x, y] = pair;
+
+            for (let i = 1; this.isWithinBounds(this.x + x * i, this.y + y * i); i++){
+                const newPointer = new BishopPointer(this.x + x * i, this.y + y * i, this.board);
+
+                if (newPointer.at().isPassable) ans.push(newPointer);
+                else break;
+            }
+        })
+
+        return ans;
+    }
 }
 
 export class RookPointer extends BasicPointer {
@@ -123,6 +143,32 @@ export class RookPointer extends BasicPointer {
         moveOne.forEach((y) => {
             for (let i = 1; this.isWithinBounds(this.x, this.y + y * i); i++)
                 ans.push(new RookPointer(this.x, this.y + y * i, this.board))
+        })
+
+        return ans;
+    }
+
+    getPassableNeighbours() : RookPointer[] {
+
+        const ans: RookPointer[] = [];
+
+        const moveOne : number[] = [1, -1];
+
+        moveOne.forEach((x) => {
+            for (let i = 1; this.isWithinBounds(this.x + x * i, this.y); i++){
+                const newPointer = new RookPointer(this.x + x * i, this.y, this.board)
+
+                if (newPointer.at().isPassable) ans.push(newPointer);
+                else break;
+            }
+        });
+        moveOne.forEach((y) => {
+            for (let i = 1; this.isWithinBounds(this.x, this.y + y * i); i++){
+                const newPointer = new RookPointer(this.x, this.y + y * i, this.board)
+
+                if (newPointer.at().isPassable) ans.push(newPointer);
+                else break;
+            }
         })
 
         return ans;
@@ -152,8 +198,12 @@ export class QueenPointer extends BasicPointer {
 
             let [x, y] = pair;
 
-            for (let i = 1; this.isWithinBounds(this.x + x * i, this.y + y * i); i++)
-                ans.push(new QueenPointer(this.x + x * i, this.y + y * i, this.board));
+            for (let i = 1; this.isWithinBounds(this.x + x * i, this.y + y * i); i++){
+                const newPointer = new QueenPointer(this.x + x * i, this.y + y * i, this.board);
+
+                if (newPointer.at().isPassable) ans.push(newPointer);
+                else break;
+            }
         });
 
         const moveOne : number[] = [1, -1];
@@ -165,6 +215,42 @@ export class QueenPointer extends BasicPointer {
         moveOne.forEach((y) => {
             for (let i = 1; this.isWithinBounds(this.x, this.y + y * i); i++)
                 ans.push(new QueenPointer(this.x, this.y + y * i, this.board))
+        })
+
+        return ans;
+    }
+
+    getPassableNeighbours() : QueenPointer[] {
+
+        const ans: QueenPointer[] = [];
+
+        const moveDiagonal : number[][] = [[1, 1], [-1, -1], [-1, 1], [1, -1]];
+
+        moveDiagonal.forEach((pair) => {
+
+            let [x, y] = pair;
+
+            for (let i = 1; this.isWithinBounds(this.x + x * i, this.y + y * i); i++)
+                ans.push(new QueenPointer(this.x + x * i, this.y + y * i, this.board));
+        });
+
+        const moveOne : number[] = [1, -1];
+
+        moveOne.forEach((x) => {
+            for (let i = 1; this.isWithinBounds(this.x + x * i, this.y); i++){
+                const newPointer = new QueenPointer(this.x + x * i, this.y, this.board)
+
+                if (newPointer.at().isPassable) ans.push(newPointer);
+                else break;
+            }
+        });
+        moveOne.forEach((y) => {
+            for (let i = 1; this.isWithinBounds(this.x, this.y + y * i); i++){
+                const newPointer = new QueenPointer(this.x, this.y + y * i, this.board)
+
+                if (newPointer.at().isPassable) ans.push(newPointer);
+                else break;
+            }
         })
 
         return ans;
