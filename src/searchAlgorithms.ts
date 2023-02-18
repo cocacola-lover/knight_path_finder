@@ -84,6 +84,30 @@ export function dijkstraSearchIterator(start : BasicPointer, end : BasicPointer)
         return aweight - bweight;
     }} as BaseSearchParameters)
 }
+
+export function greedySearchIterator(start : BasicPointer, end : BasicPointer) : SearchIterator {
+    return baseSearchIterator({start, end, orderFunction : (a : BasicPointer, b : BasicPointer) => {
+
+        const getDistanse = (a : BasicPointer, b : BasicPointer) => {
+            return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+        }
+
+        return getDistanse(a, end) - getDistanse(b, end);
+
+    }} as BaseSearchParameters)
+}
+
+export function aStarSearchIterator(start : BasicPointer, end : BasicPointer) : SearchIterator {
+    return baseSearchIterator({start, end, orderFunction : (a : BasicPointer, b : BasicPointer) => {
+
+        const getDistanse = (a : BasicPointer, b : BasicPointer) => {
+            return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+        }
+
+        return (getDistanse(a, end) + getDistanse(a, start)) - (getDistanse(b, end) + getDistanse(b, start));
+
+    }} as BaseSearchParameters)
+}
 }
 
 export default PathFindingIterators;
